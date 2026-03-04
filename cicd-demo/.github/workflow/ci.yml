@@ -6,8 +6,14 @@ on:
     branches: [ main ]
 
   jobs:
-    build-and-test:
-    runs-on: ubuntu-latest
+    build:
+      runs-on: ubuntu-latest
+      steps: [checkout, setup-java, mvn package]
+
+    test:
+      needs: build
+      runs-on: ubuntu-latest
+      steps: [checkout, setup-java, mvn test]
 
   steps:
   # Paso 1: Descargar el código
